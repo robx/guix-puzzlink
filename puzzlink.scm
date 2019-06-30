@@ -20,13 +20,12 @@
         #:builder
          (begin
            (use-modules (guix build utils))
-           (let ((out (assoc-ref %output "out")))
-             (copy-recursively
-               (assoc-ref %build-inputs "pzpr-puzzlink")
-               out)
-             (copy-recursively
-               (assoc-ref %build-inputs "puzzledb-frontend")
-               (string-append out "/db"))))))
+           (copy-recursively
+             (assoc-ref %build-inputs "pzpr-puzzlink")
+             %output)
+           (copy-recursively
+             (assoc-ref %build-inputs "puzzledb-frontend")
+             (string-append %output "/db")))))
     (home-page #f)
     (synopsis #f)
     (license #f)
