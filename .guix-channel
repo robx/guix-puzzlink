@@ -1,0 +1,6 @@
+(channel
+  (version 0)
+  (dependencies
+   (channel
+    (name elm)
+    (url "https://github.com/robx/guix-elm.git"))))
