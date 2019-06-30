@@ -208,7 +208,7 @@
                  (out (assoc-ref %outputs "out")))
             (copy-recursively elm out)
             (for-each
-              (lambda (f) (copy (string-append source "/" f) out))
+              (lambda (f) (copy-file (string-append source "/" f) (string-append out "/" f)))
               '("style.css" "all.html" "blogs.html" "puzzle.html"))))))
    (description #f)
    (synopsis #f)
