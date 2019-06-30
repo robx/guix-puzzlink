@@ -1,4 +1,4 @@
-(define-module (puzzledb)
+(define-module (puzzledb-tools)
   #:use-module (gnu packages golang)
   #:use-module (guix download)
   #:use-module (guix gexp)
@@ -231,4 +231,3 @@
     (description "x/oauth2")
     (home-page #f)
     (license #f)))
-     
