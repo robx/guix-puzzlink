@@ -209,7 +209,7 @@
             (copy-recursively elm out)
             (for-each
               (lambda (f) (copy (string-append source "/" f) out))
-              ("style.css" "all.html" "blogs.html" "puzzle.html"))))))
+              '("style.css" "all.html" "blogs.html" "puzzle.html"))))))
    (description #f)
    (synopsis #f)
    (license #f)
