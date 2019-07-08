@@ -18,7 +18,7 @@
             (commit "dist")))
         (sha256
           (base32
-            "0ln8vsnm0cj684h98glfww4bmhm61d2v1bhckjqda80n2d1906yx"))))
+            "12n97fybj5v20dwlqh4dl0hzf89r5bzlhrx82kwpsh44pagy2i4h"))))
     (build-system trivial-build-system)
     (arguments
       `(#:modules ((guix build utils))
