@@ -15,7 +15,7 @@
         (uri
           (git-reference
             (url "https://github.com/robx/pzprjs.git")
-            (commit "dist")))
+            (commit "3d27b536d362aed24b7f0e2261322c0ccd46f6cb")))
         (sha256
           (base32
             "12n97fybj5v20dwlqh4dl0hzf89r5bzlhrx82kwpsh44pagy2i4h"))))
