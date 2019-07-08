@@ -9,7 +9,7 @@
 (define-public puzzledb-tools
   (package
     (name "puzzledb-tools")
-    (version "20190625-git")
+    (version "20190708-git")
     (source
       (local-file
         "/home/rob/puzzledb/tools"
