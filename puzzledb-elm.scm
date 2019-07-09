@@ -8,8 +8,7 @@
   #:use-module (gnu packages compression)
   #:use-module (json)
   #:use-module (elm)
-  #:use-module (build-elm)
-  #:use-module (versions))
+  #:use-module (guix build elm-utils))
 
 (define* (elm-package package version hash)
   (origin
