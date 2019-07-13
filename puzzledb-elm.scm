@@ -141,10 +141,10 @@
       ("elm-color" ,elm-color)
       ("elm-collage" ,elm-collage)))
     (arguments
-     `(#:modules ((guix build utils) (build-elm) (json parser) (versions))
+     `(#:modules ((guix build utils) (guix build elm-utils) (json parser) (versions))
        #:builder
          (begin
-           (use-modules (guix build utils) (ice-9 match) (build-elm) (json parser) (versions))
+           (use-modules (guix build utils) (ice-9 match) (guix build elm-utils) (json parser) (versions))
            (let* ((elmpkg (assoc-ref %build-inputs "elm-compiler"))
                   (elm (string-append elmpkg "/bin/elm"))
                   (tar (assoc-ref %build-inputs "tar"))
