@@ -16,7 +16,8 @@
   #:use-module (gnu packages gnome) ;librsvg
   #:use-module (guix build-system trivial)
 
-  #:use-module (pzpr))
+  #:use-module (pzpr)
+  #:use-module (puzzlink))
 
 (define-public pzprnode
   (package
