@@ -131,5 +131,5 @@ standard output and error redirected to syslog via logger."
           (service-extension account-service-type
                              (const %pzprnode-accounts))
           (service-extension profile-service-type
-                             (list font-adobe-source-han-sans)))
+                             (list font-adobe-source-han-sans))))
    (default-value (pzprnode-configuration))))
