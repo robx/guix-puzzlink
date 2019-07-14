@@ -5,6 +5,7 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system elm)
   #:use-module (guix build-system trivial)
+  #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (json))
