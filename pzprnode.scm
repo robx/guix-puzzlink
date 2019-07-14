@@ -12,6 +12,7 @@
   #:use-module (gnu packages admin)
   #:use-module (gnu packages node)
   #:use-module (gnu packages bash)
+  #:use-module (gnu packages fonts)
   #:use-module (gnu packages imagemagick)
   #:use-module (gnu packages gnome) ;librsvg
   #:use-module (guix build-system trivial)
