@@ -79,6 +79,7 @@
          (shell (file-append shadow "/sbin/nologin")))))
 
 ; copied over from postgrest
+; FIXME: handle command line arguments
 (define* (logger-wrapper name exec . args)
   "Return a derivation that builds a script to start a process with
 standard output and error redirected to syslog via logger."
@@ -102,8 +103,8 @@ standard output and error redirected to syslog via logger."
           (documentation "Run the puzzle-draw daemon.")
           (requirement '(user-processes))
           (start #~(make-forkexec-constructor
-                    '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw "/bin/servepuzzle"))
-                      "-l" "127.0.0.1" "-p" "8765")
+                    '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw "/bin/servepuzzle")
+                      "-l" "127.0.0.1" "-p" "8765"))
                     #:user "pzldraw"
                     #:group "pzldraw"))
           (stop #~(make-kill-destructor)))))))
