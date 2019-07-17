@@ -53,6 +53,61 @@
     functionality for parsing puzzle data from a YAML file format.")
     (license license:expat)))
 
+;; todo: configure port
+(define-record-type* <puzzle-draw-configuration>
+  puzzle-draw-configuration make-puzzle-draw-configuration
+  puzzle-draw-configuration?
+  (puzzle-draw puzzle-draw-configuration-puzzle-draw (default puzzle-draw)))
+
+(define %puzzle-draw-accounts
+  (list (user-group (name "pzldraw") (system? #t))
+        (user-account
+         (name "pzldraw")
+         (group "pzldraw")
+         (system? #t)
+         (comment "puzzle-draw server user")
+         (home-directory "/var/empty")
+         (shell (file-append shadow "/sbin/nologin")))))
+
+; copied over from postgrest
+(define* (logger-wrapper name exec . args)
+  "Return a derivation that builds a script to start a process with
+standard output and error redirected to syslog via logger."
+  (define exp
+    #~(begin
+        (use-modules (ice-9 popen))
+        (let* ((pid    (number->string (getpid)))
+               (logger #$(file-append inetutils "/bin/logger"))
+               (args   (list "-t" #$name (string-append "--id=" pid)))
+               (pipe   (apply open-pipe* OPEN_WRITE logger args)))
+          (dup pipe 1)
+          (dup pipe 2)
+          (execl #$exec #$exec #$@args))))
+  (program-file (string-append name "-logger") exp))
+
+(define puzzle-draw-shepherd-service
+  (match-lambda
+   (($ <puzzle-draw-configuration> puzzle-draw)
+    (list (shepherd-service
+          (provision '(puzzle-draw))
+          (documentation "Run the puzzle-draw daemon.")
+          (requirement '(user-processes))
+          (start #~(make-forkexec-constructor
+                    '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw "/bin/servepuzzle")))
+                    #:user "pzldraw"
+                    #:group "pzldraw"))
+          (stop #~(make-kill-destructor)))))))
+
+(define-public puzzle-draw-service-type
+  (service-type
+   (name 'puzzle-draw)
+   (extensions
+    (list (service-extension shepherd-root-service-type
+                             puzzle-draw-shepherd-service)
+          (service-extension account-service-type
+                             (const %puzzle-draw-accounts))))
+   (default-value (puzzle-draw-configuration))))
+
 (define-public ghc-diagrams-lib
   (package
     (name "ghc-diagrams-lib")
