@@ -104,7 +104,7 @@ standard output and error redirected to syslog via logger."
           (requirement '(user-processes))
           (start #~(make-forkexec-constructor
                     '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw "/bin/servepuzzle")
-                      "-l" "127.0.0.1" "-p" "8765"))
+                      "-b" "127.0.0.1" "-p" "8765"))
                     #:user "pzldraw"
                     #:group "pzldraw"))
           (stop #~(make-kill-destructor)))))))
