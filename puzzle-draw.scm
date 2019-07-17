@@ -6,8 +6,6 @@
   #:use-module (guix git-download)
   #:use-module (guix packages)
 
-  #:use-module (check) ; from postgrest
-
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell))
 
