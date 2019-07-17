@@ -6,6 +6,14 @@
   #:use-module (guix git-download)
   #:use-module (guix packages)
 
+  #:use-module (guix gexp)
+  #:use-module (guix records)
+  #:use-module (gnu system accounts)
+  #:use-module (gnu system shadow)
+  #:use-module (gnu services)
+  #:use-module (gnu services shepherd)
+
+
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell))
 
