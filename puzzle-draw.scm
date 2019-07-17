@@ -13,6 +13,7 @@
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
   #:use-module (gnu packages admin)
+  #:use-module (ice-9 match)
 
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell))
