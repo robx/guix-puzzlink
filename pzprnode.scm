@@ -113,16 +113,16 @@ standard output and error redirected to syslog via logger."
 
 (define pzprnode-shepherd-service
   (match-lambda
-   (($ <pzprnode-configuration> pzpr-node)
-    (list (shepherd-service
-          (provision '(pzprnode))
-          (documentation "Run the pzprnode daemon.")
-          (requirement '(user-processes))
-          (start #~(make-forkexec-constructor
-                    '(#$(logger-wrapper "pzprnode" (file-append pzpr-node "/bin/pzprnode")))
-                    #:user "pzprnode"
-                    #:group "pzprnode"))
-          (stop #~(make-kill-destructor)))))))
+    (($ <pzprnode-configuration> pzpr-node)
+     (list (shepherd-service
+            (provision '(pzprnode))
+            (documentation "Run the pzprnode daemon.")
+            (requirement '(user-processes))
+            (start #~(make-forkexec-constructor
+                      '(#$(logger-wrapper "pzprnode" (file-append pzpr-node "/bin/pzprnode")))
+                      #:user "pzprnode"
+                      #:group "pzprnode"))
+            (stop #~(make-kill-destructor)))))))
 
 (define-public pzprnode-service-type
   (service-type
