@@ -247,6 +247,7 @@
                 (bash (assoc-ref %build-inputs "bash"))
                 (out (assoc-ref %outputs "out")))
            (copy-recursively (string-append source "/static") (string-append out "/static"))
+           (copy-recursively (string-append source "/tests/examples") (string-append out "/tests/examples"))
            (copy-recursively elm (string-append out "/static"))
            (install-file
             (string-append draw "/bin/servepuzzle")
