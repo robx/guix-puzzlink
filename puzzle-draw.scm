@@ -264,7 +264,7 @@
 (define-record-type* <puzzle-draw-configuration>
   puzzle-draw-configuration make-puzzle-draw-configuration
   puzzle-draw-configuration?
-  (puzzle-draw puzzle-draw-configuration-puzzle-draw (default puzzle-draw)))
+  (puzzle-draw puzzle-draw-configuration-puzzle-draw (default puzzle-draw-frontend)))
 
 (define %puzzle-draw-accounts
   (list (user-group (name "pzldraw") (system? #t))
@@ -295,17 +295,17 @@ standard output and error redirected to syslog via logger."
 
 (define puzzle-draw-shepherd-service
   (match-lambda
-   (($ <puzzle-draw-configuration> puzzle-draw)
-    (list (shepherd-service
-          (provision '(puzzle-draw))
-          (documentation "Run the puzzle-draw daemon.")
-          (requirement '(user-processes))
-          (start #~(make-forkexec-constructor
-                    '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw "/bin/servepuzzle")
-                      "-b" "127.0.0.1" "-p" "8765"))
-                    #:user "pzldraw"
-                    #:group "pzldraw"))
-          (stop #~(make-kill-destructor)))))))
+    (($ <puzzle-draw-configuration> puzzle-draw-frontend)
+     (list (shepherd-service
+            (provision '(puzzle-draw))
+            (documentation "Run the puzzle-draw daemon.")
+            (requirement '(user-processes))
+            (start #~(make-forkexec-constructor
+                      '(#$(logger-wrapper "puzzle-draw" (file-append puzzle-draw-frontend "/bin/servepuzzle")
+                                          "-b" "127.0.0.1" "-p" "8765"))
+                      #:user "pzldraw"
+                      #:group "pzldraw"))
+            (stop #~(make-kill-destructor)))))))
 
 (define-public puzzle-draw-service-type
   (service-type
