@@ -17,6 +17,7 @@
 
   #:use-module (guix build-system elm)
   #:use-module (guix build-system trivial)
+  #:use-module (gnu packages bash)
 
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell))
@@ -227,8 +228,11 @@
   (package
     (name "puzzle-draw-frontend")
     (version "current")
-    (source "/home/rob/puzzle-draw/static")
+    (source "/home/rob/puzzle-draw")
     (build-system trivial-build-system)
+    (inputs
+     `(("puzzle-draw" ,puzzle-draw)
+       ("bash" ,bash)))
     (native-inputs
      `(("puzzle-draw-elm" ,puzzle-draw-elm)))
     (arguments
@@ -237,10 +241,19 @@
        (begin
          (use-modules (guix build utils))
          (let* ((elm (assoc-ref %build-inputs "puzzle-draw-elm"))
+                (draw (assoc-ref %build-inputs "puzzle-draw"))
                 (source (assoc-ref %build-inputs "source"))
+                (bash (assoc-ref %build-inputs "bash"))
                 (out (assoc-ref %outputs "out")))
-           (copy-recursively elm out)
-           (copy-recursively source out)))))
+           (copy-recursively (string-append source "/static") (string-append out "/static"))
+           (copy-recursively elm (string-append out "/static"))
+           (install-file
+            (string-append draw "/bin/servepuzzle")
+            (string-append out "/bin"))
+           (setenv "PATH" (string-append (getenv "PATH") ":" bash "/bin"))
+           (wrap-program
+             (string-append out "/bin/servepuzzle")
+             `("PUZZLE_DRAW_ROOT" ":" = (,out)))))))
     (description #f)
     (synopsis #f)
     (license #f)
