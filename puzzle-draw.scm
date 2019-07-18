@@ -210,6 +210,7 @@
       (version "current")
       (source "/home/rob/puzzle-draw/web")
       (build-system elm-application-build-system)
+      (arguments `(#:elm-modules ((("Main.elm") "web.js"))))
       (native-inputs
        `(("elm-virtual-dom" ,elm-virtual-dom)
          ("elm-time" ,elm-time)
