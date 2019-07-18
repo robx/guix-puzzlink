@@ -25,56 +25,56 @@
     (name "pzprnode")
     (version "git-dist")
     (source
-      (origin
-        (method git-fetch)
-        (file-name (git-file-name name version))
-        (uri
-          (git-reference
-            (url "https://github.com/robx/pzprnode.git")
-            (commit "master")))
-        (sha256
-          (base32
-            "1r2c0nj01jqwlb741a0jb8h3jj4nac6yz0xmc82k39nzwvsnj17x"))))
+     (origin
+       (method git-fetch)
+       (file-name (git-file-name name version))
+       (uri
+        (git-reference
+         (url "https://github.com/robx/pzprnode.git")
+         (commit "master")))
+       (sha256
+        (base32
+         "1r2c0nj01jqwlb741a0jb8h3jj4nac6yz0xmc82k39nzwvsnj17x"))))
     (build-system trivial-build-system)
     (inputs
-      `(("node" ,node)
-        ("graphicsmagick" ,graphicsmagick)
-        ("librsvg" ,librsvg)
-        ("bash" ,bash)
-        ("pzprjs" ,pzprjs)
-        ("pzpr-puzzlink" ,pzpr-puzzlink)))
+     `(("node" ,node)
+       ("graphicsmagick" ,graphicsmagick)
+       ("librsvg" ,librsvg)
+       ("bash" ,bash)
+       ("pzprjs" ,pzprjs)
+       ("pzpr-puzzlink" ,pzpr-puzzlink)))
     (arguments
-      `(#:modules ((guix build utils))
-        #:builder
-         (begin
-           (use-modules (guix build utils))
-           (let* ((out (assoc-ref %outputs "out"))
-                  (bin (string-append out "/bin"))
-                  (source (assoc-ref %build-inputs "source"))
-                  (node (assoc-ref %build-inputs "node"))
-                  (pzpr (assoc-ref %build-inputs "pzpr-puzzlink"))
-                  (pzprjs (assoc-ref %build-inputs "pzprjs"))
-                  (bash (assoc-ref %build-inputs "bash"))
-                  (gm (assoc-ref %build-inputs "graphicsmagick"))
-                  (rsvg (assoc-ref %build-inputs "librsvg")))
-             (copy-recursively
-               (string-append source "/templates")
-               (string-append out "/templates"))
-             (install-file
-               (string-append source "/pzprnode")
-               bin)
+     `(#:modules ((guix build utils))
+       #:builder
+       (begin
+         (use-modules (guix build utils))
+         (let* ((out (assoc-ref %outputs "out"))
+                (bin (string-append out "/bin"))
+                (source (assoc-ref %build-inputs "source"))
+                (node (assoc-ref %build-inputs "node"))
+                (pzpr (assoc-ref %build-inputs "pzpr-puzzlink"))
+                (pzprjs (assoc-ref %build-inputs "pzprjs"))
+                (bash (assoc-ref %build-inputs "bash"))
+                (gm (assoc-ref %build-inputs "graphicsmagick"))
+                (rsvg (assoc-ref %build-inputs "librsvg")))
+           (copy-recursively
+            (string-append source "/templates")
+            (string-append out "/templates"))
+           (install-file
+            (string-append source "/pzprnode")
+            bin)
            (patch-shebang
-             (string-append bin "/pzprnode")
-             (list (string-append node "/bin")))
+            (string-append bin "/pzprnode")
+            (list (string-append node "/bin")))
            (setenv "PATH" (string-append (getenv "PATH") ":" bash "/bin"))
            (wrap-program
-             (string-append bin "/pzprnode")
+               (string-append bin "/pzprnode")
              `("PATH" ":" prefix (,(string-append gm "/bin")
                                   ,(string-append rsvg "/bin")))
              `("NODE_PATH" ":" prefix (,(string-append pzprjs "/js")))
              `("TEMPLATE_DIR" ":" = (,(string-append out "/templates")))
              `("PZPR_DIR" ":" = (,pzpr))))
-           #t)))
+         #t)))
     (home-page #f)
     (synopsis #f)
     (license #f)
