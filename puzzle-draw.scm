@@ -224,7 +224,7 @@
       (home-page #f)
       (license #f))))
 
-(define-public puzzle-draw-fontend
+(define-public puzzle-draw-frontend
   (package
     (name "puzzle-draw-frontend")
     (version "current")
