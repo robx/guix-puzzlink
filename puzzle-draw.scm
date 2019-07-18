@@ -15,6 +15,9 @@
   #:use-module (gnu packages admin)
   #:use-module (ice-9 match)
 
+  #:use-module (guix build-system elm)
+  #:use-module (guix build-system trivial)
+
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix build-system haskell))
 
@@ -61,6 +64,188 @@
     puzzles, and to support several specific puzzles types In addition, it includes
     functionality for parsing puzzle data from a YAML file format.")
     (license license:expat)))
+
+(define-public puzzle-draw-elm
+  (let ((elm-virtual-dom
+         (package
+           (name "elm-virtual-dom")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/virtual-dom" version))
+              (sha256
+               (base32
+                "0hm8g92h7z39km325dlnhk8n00nlyjkqp3r3jppr37k2k13md6aq"))))
+           (build-system elm-package-build-system)
+           (synopsis
+            "Core virtual DOM implementation, basis for HTML and SVG libraries")
+           (description
+            "Core virtual DOM implementation, basis for HTML and SVG libraries")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-time
+         (package
+           (name "elm-time")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/time" version))
+              (sha256
+               (base32
+                "0vch7i86vn0x8b850w1p69vplll1bnbkp8s383z7pinyg94cm2z1"))))
+           (build-system elm-package-build-system)
+           (synopsis
+            "Work with POSIX times, time zones, years, months, days, hours, seconds, etc.")
+           (description
+            "Work with POSIX times, time zones, years, months, days, hours, seconds, etc.")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-core
+         (package
+           (name "elm-core")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/core" version))
+              (sha256
+               (base32
+                "10kr86h4v5h4p0586q406a5wbl8xvr1jyrf6097zp2wb8sv21ylw"))))
+           (build-system elm-package-build-system)
+           (synopsis "Elm's standard libraries")
+           (description "Elm's standard libraries")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-http
+         (package
+           (name "elm-http")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/http" version))
+              (sha256
+               (base32
+                "1igmm89ialzrjib1j8xagkxalq1x2gj4l0hfxcd66mpwmvg7psl8"))))
+           (build-system elm-package-build-system)
+           (synopsis "Make HTTP requests")
+           (description "Make HTTP requests")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-html
+         (package
+           (name "elm-html")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/html" version))
+              (sha256
+               (base32
+                "1n3gpzmpqqdsldys4ipgyl1zacn0kbpc3g4v3hdpiyfjlgh8bf3k"))))
+           (build-system elm-package-build-system)
+           (synopsis
+            "Fast HTML, rendered with virtual DOM diffing")
+           (description
+            "Fast HTML, rendered with virtual DOM diffing")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-json
+         (package
+           (name "elm-json")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/json" version))
+              (sha256
+               (base32
+                "1g0hafkqf2q633r7ir9wxpb1lnlzskhpsyi0h5bkzj0gl072zfnb"))))
+           (build-system elm-package-build-system)
+           (synopsis "Encode and decode JSON values")
+           (description "Encode and decode JSON values")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-url
+         (package
+           (name "elm-url")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/url" version))
+              (sha256
+               (base32
+                "0av8x5syid40sgpl5vd7pry2rq0q4pga28b4yykn9gd9v12rs3l4"))))
+           (build-system elm-package-build-system)
+           (synopsis
+            "Create and parse URLs. Use for HTTP and \"routing\" in single-page apps (SPAs)")
+           (description
+            "Create and parse URLs. Use for HTTP and \"routing\" in single-page apps (SPAs)")
+           (home-page #f)
+           (license license:bsd-3)))
+        (elm-browser
+         (package
+           (name "elm-browser")
+           (version "1.0.0")
+           (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "elm/browser" version))
+              (sha256
+               (base32
+                "1apmvyax93nvmagwj00y16zx10kfv640cxpi64xgqbgy7d2wphy4"))))
+           (build-system elm-package-build-system)
+           (synopsis
+            "Run Elm in browsers, with access to browser history for single-page apps (SPAs)")
+           (description
+            "Run Elm in browsers, with access to browser history for single-page apps (SPAs)")
+           (home-page #f)
+           (license license:bsd-3))))
+    (package
+      (name "puzzle-draw-elm")
+      (version "current")
+      (source "/home/rob/puzzle-draw/web")
+      (build-system elm-application-build-system)
+      (native-inputs
+       `(("elm-virtual-dom" ,elm-virtual-dom)
+         ("elm-time" ,elm-time)
+         ("elm-core" ,elm-core)
+         ("elm-http" ,elm-http)
+         ("elm-html" ,elm-html)
+         ("elm-json" ,elm-json)
+         ("elm-url" ,elm-url)
+         ("elm-browser" ,elm-browser)))
+      (synopsis #f)
+      (description #f)
+      (home-page #f)
+      (license #f))))
+
+(define-public puzzle-draw-fontend
+  (package
+    (name "puzzle-draw-frontend")
+    (version "current")
+    (source "/home/rob/puzzle-draw/static")
+    (build-system trivial-build-system)
+    (native-inputs
+     `(("puzzle-draw-elm" ,puzzle-draw-elm)))
+    (arguments
+     `(#:modules ((guix build utils))
+       #:builder
+       (begin
+         (use-modules (guix build utils))
+         (let* ((elm (assoc-ref %build-inputs "puzzle-draw-elm"))
+                (source (assoc-ref %build-inputs "source"))
+                (out (assoc-ref %outputs "out")))
+           (copy-recursively elm out)
+           (copy-recursively source out)))))
+    (description #f)
+    (synopsis #f)
+    (license #f)
+    (home-page #f)))
+
 
 ;; todo: configure port
 (define-record-type* <puzzle-draw-configuration>
