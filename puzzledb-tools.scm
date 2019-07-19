@@ -9,11 +9,11 @@
 (define-public puzzledb-tools
   (package
     (name "puzzledb-tools")
-    (version "20190708-git")
-    (source
-      (local-file
-        "/home/rob/puzzledb/tools"
-        #:recursive? #t))
+    (version "current")
+    (source "/home/rob/puzzledb/tools")
+;      (local-file
+;        "/home/rob/puzzledb/tools"
+;        #:recursive? #t))
 ;      (origin
 ;        (method git-fetch)
 ;        (file-name (git-file-name name version))

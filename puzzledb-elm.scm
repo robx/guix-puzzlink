@@ -13,11 +13,8 @@
 (define-public puzzledb-frontend
  (package
    (name "puzzledb-frontend")
-   (version "20190625-git")
-   (source
-      (local-file
-        "/home/rob/puzzledb/frontend"
-        #:recursive? #t))
+   (version "current")
+   (source "/home/rob/puzzledb/frontend")
    (build-system trivial-build-system)
    (native-inputs
     `(("puzzledb-elm" ,puzzledb-elm)))
@@ -434,11 +431,8 @@
           (license license:bsd-3))))
   (package
     (name "puzzledb-elm")
-    (version "20190625-git")
-    (source
-       (local-file
-         "/home/rob/puzzledb/frontend"
-         #:recursive? #t))
+    (version "current")
+    (source "/home/rob/puzzledb/frontend")
     (build-system elm-application-build-system)
     (native-inputs
       `(("elm-regex" ,elm-regex)
