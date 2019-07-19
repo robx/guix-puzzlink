@@ -13,7 +13,7 @@
     (source #f)
     (build-system trivial-build-system)
     (inputs
-     `(("pzpr-puzzlink" ,pzpr-puzzlink-local)
+     `(("pzpr-puzzlink" ,pzpr-puzzlink)
        ("puzzledb-frontend" ,puzzledb-frontend)))
     (arguments
       `(#:modules ((guix build utils))
