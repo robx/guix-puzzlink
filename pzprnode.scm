@@ -41,8 +41,8 @@
        ("graphicsmagick" ,graphicsmagick)
        ("librsvg" ,librsvg)
        ("bash" ,bash)
-       ("pzprjs" ,pzprjs)
-       ("pzpr-puzzlink" ,pzpr-puzzlink)))
+       ("pzprjs" ,pzprjs-local)
+       ("pzpr-puzzlink" ,pzpr-puzzlink-local)))
     (arguments
      `(#:modules ((guix build utils))
        #:builder
