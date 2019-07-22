@@ -24,17 +24,7 @@
   (package
     (name "pzprnode")
     (version "git-dist")
-    (source
-     (origin
-       (method git-fetch)
-       (file-name (git-file-name name version))
-       (uri
-        (git-reference
-         (url "https://github.com/robx/pzprnode.git")
-         (commit "master")))
-       (sha256
-        (base32
-         "1r2c0nj01jqwlb741a0jb8h3jj4nac6yz0xmc82k39nzwvsnj17x"))))
+    (source "/home/rob/pzprnode")
     (build-system trivial-build-system)
     (inputs
      `(("node" ,node)
