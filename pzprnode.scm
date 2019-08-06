@@ -31,8 +31,7 @@
        ("graphicsmagick" ,graphicsmagick)
        ("librsvg" ,librsvg)
        ("bash" ,bash)
-       ("pzprjs" ,pzprjs)
-       ("pzpr-puzzlink" ,pzpr-puzzlink)))
+       ("pzprjs" ,pzprjs)))
     (arguments
      `(#:modules ((guix build utils))
        #:builder
@@ -42,7 +41,6 @@
                 (bin (string-append out "/bin"))
                 (source (assoc-ref %build-inputs "source"))
                 (node (assoc-ref %build-inputs "node"))
-                (pzpr (assoc-ref %build-inputs "pzpr-puzzlink"))
                 (pzprjs (assoc-ref %build-inputs "pzprjs"))
                 (bash (assoc-ref %build-inputs "bash"))
                 (gm (assoc-ref %build-inputs "graphicsmagick"))
@@ -63,7 +61,7 @@
                                   ,(string-append rsvg "/bin")))
              `("NODE_PATH" ":" prefix (,(string-append pzprjs "/js")))
              `("TEMPLATE_DIR" ":" = (,(string-append out "/templates")))
-             `("PZPR_DIR" ":" = (,pzpr))))
+             `("PZPR_DIR" ":" = (,pzprjs))))
          #t)))
     (home-page #f)
     (synopsis #f)

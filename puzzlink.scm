@@ -13,7 +13,7 @@
     (source #f)
     (build-system trivial-build-system)
     (inputs
-     `(("pzpr-puzzlink" ,pzpr-puzzlink)
+     `(("pzprjs" ,pzprjs)
        ("puzzledb-frontend" ,puzzledb-frontend)))
     (arguments
       `(#:modules ((guix build utils))
@@ -21,7 +21,7 @@
          (begin
            (use-modules (guix build utils))
            (copy-recursively
-             (assoc-ref %build-inputs "pzpr-puzzlink")
+             (assoc-ref %build-inputs "pzprjs")
              %output)
            (copy-recursively
              (assoc-ref %build-inputs "puzzledb-frontend")
