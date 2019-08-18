@@ -1,7 +1,7 @@
 (define-module (puzzle-draw)
-  #:use-module (gnu packages haskell)
   #:use-module (gnu packages haskell-check)
   #:use-module (gnu packages haskell-web)
+  #:use-module (gnu packages haskell-xyz)
   #:use-module (guix download)
   #:use-module (guix git-download)
   #:use-module (guix packages)
