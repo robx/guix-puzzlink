@@ -223,7 +223,7 @@
         (base32
           "1rjzk0bmraszy9n38r5kwrpigfhmnzlna84ak12azz3ydrkwh90y"))))
     (build-system go-build-system)
-    (propagated-inputs `(("go-golang-org-x-net-context" ,go-golang-org-x-net-context)))
+    (propagated-inputs `(("go-golang-org-x-net" ,go-golang-org-x-net)))
     (arguments
       `(#:import-path "golang.org/x/oauth2"
         #:unpack-path "golang.org/x/oauth2"))
