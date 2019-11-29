@@ -361,7 +361,7 @@ standard output and error redirected to syslog via logger."
 (define-public ghc-vector-space
   (package
     (name "ghc-vector-space")
-    (version "0.13")
+    (version "0.16")
     (source
      (origin
        (method url-fetch)
@@ -371,16 +371,12 @@ standard output and error redirected to syslog via logger."
              ".tar.gz"))
        (sha256
         (base32
-         "05yn93vnhzhpp2i6qb4b3dasvmpk71rab6vhssqvpb3qhdvxb482"))))
+         "17676s2f8i45dj5gk370nc8585aylah7m34nbf34al7r1492y2qc"))))
     (build-system haskell-build-system)
     (inputs
      `(("ghc-memotrie" ,ghc-memotrie)
        ("ghc-boolean" ,ghc-boolean)
        ("ghc-numinstances" ,ghc-numinstances)))
-    (arguments
-     `(#:cabal-revision
-       ("2"
-        "1p9vibym0ggr1rjyak0wphswdl4vik2b2w85afgvyj9zn32w28bw")))
     (home-page
      "http://hackage.haskell.org/package/vector-space")
     (synopsis
@@ -564,7 +560,7 @@ standard output and error redirected to syslog via logger."
 (define-public ghc-rasterific
   (package
     (name "ghc-rasterific")
-    (version "0.7.4")
+    (version "0.7.4.4")
     (source
      (origin
        (method url-fetch)
@@ -574,7 +570,7 @@ standard output and error redirected to syslog via logger."
              ".tar.gz"))
        (sha256
         (base32
-         "13f5ay9wmva9k15a6pk4imxz6rj80gwc1f16906m7a6rm9vgwvlq"))))
+         "1s8d0yyh2xz8kb9476nr11jzxvgq0y9sgspgzhh9shf44fbz4gs0"))))
     (build-system haskell-build-system)
     (inputs
      `(("ghc-free" ,ghc-free)
