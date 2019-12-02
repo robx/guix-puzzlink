@@ -11,23 +11,6 @@
     (name "puzzledb-tools")
     (version "current")
     (source "/home/rob/puzzledb/tools")
-;      (local-file
-;        "/home/rob/puzzledb/tools"
-;        #:recursive? #t))
-;      (origin
-;        (method git-fetch)
-;        (file-name (git-file-name name version))
-;        (uri
-;          (git-reference
-;            (url "/home/rob/puzzledb")
-;            (commit "master")))
-;        (sha256
-;          (base32
-;            "06g65r3z52layafrx50nipz4by6mjjbg6arp238fazqd3rzlbm79"))))
-;    (build-system go-build-system)
-;    (arguments
-;      `(#:import-path "src"))
-;    (build-system gnu-build-system)
     (build-system go-build-system)
     (arguments
       `(#:import-path "gitlab.com/rrrob/puzzledb/tools"
@@ -45,6 +28,7 @@
     (native-inputs
       `(("go-gofeed" ,go-gofeed)
         ("go-x-net-html" ,go-x-net-html)
+        ("go-imaging" ,go-imaging)
         ("go-x-oauth2" ,go-x-oauth2)))
     (synopsis "puzzledb tools")
     (license #f)
@@ -180,10 +164,8 @@
     (home-page #f)
     (license #f)))
 
-;(define-public go-x-text-encoding
 (define-public go-x-text
   (package
-;    (name "go-x-text-encoding")
     (name "go-x-text")
     (version "v0.3.0")
     (source
@@ -199,11 +181,41 @@
           "0r6x6zjzhr8ksqlpiwm5gdd7s209kwk5p4lw54xjvz10cs3qlq19"))))
     (build-system go-build-system)
     (arguments
-;      `(#:import-path "golang.org/x/text/encoding"
       `(#:import-path "golang.org/x/text"
         #:unpack-path "golang.org/x/text"))
     (synopsis "x/text/encoding")
     (description "x/text/encoding")
+    (home-page #f)
+    (license #f)))
+
+(define-public go-x-image
+  (package
+    (name "go-x-image")
+    (version "v0.0.0-20191009234506-e7c1f5e7dbb8")
+    (source
+     (origin
+      (method git-fetch)
+      (file-name (git-file-name name version))
+      (uri
+        (git-reference
+          (url "https://go.googlesource.com/image")
+          (commit "e7c1f5e7dbb8")))
+      (sha256
+        (base32
+          "0czp897aicqw1dgybj0hc2zzwb20rhqkdqm7siqci3yk7yk9cymf"))))
+    (build-system go-build-system)
+    (arguments
+      `(#:import-path "golang.org/x/image"
+        #:unpack-path "golang.org/x/image"
+        #:phases
+        (modify-phases %standard-phases
+          (add-after 'unpack 'generate-go-file
+            (lambda _
+              (call-with-output-file "src/golang.org/x/image/image.go"
+                (lambda (port)
+                  (format port "package image"))))))))
+    (synopsis "x/image")
+    (description "x/image")
     (home-page #f)
     (license #f)))
 
@@ -230,4 +242,30 @@
     (synopsis "x/oauth2")
     (description "x/oauth2")
     (home-page #f)
+    (license #f)))
+
+(define-public go-imaging
+  (package
+    (name "go-imaging")
+    (version "v1.6.2")
+    (source
+     (origin
+      (method git-fetch)
+      (file-name (git-file-name name version))
+      (uri
+        (git-reference
+          (url "http://github.com/disintegration/imaging")
+          (commit version)))
+      (sha256
+        (base32
+          "1sl201nmk601h0aii4234sycn4v2b0rjxf8yhrnik4yjzd68q9x5"))))
+    (build-system go-build-system)
+    (propagated-inputs
+      `(("go-x-image" ,go-x-image)))
+    (arguments
+      `(#:import-path "github.com/disintegration/imaging"
+        #:tests? #f))
+    (synopsis "imaging")
+    (description "imaging")
+    (home-page "https://github.com/disintegration/imaging")
     (license #f)))
