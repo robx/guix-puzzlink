@@ -428,6 +428,24 @@
           (description
             "Run Elm in browsers, with access to browser history for single-page apps (SPAs)")
           (home-page #f)
+          (license license:bsd-3)))
+      (elm-datetime
+        (package
+          (name "elm-datetime")
+          (version "1.0.8")
+          (source
+            (origin
+              (method url-fetch)
+              (uri (elm-package-uri "robx/elm-datetime" version))
+              (sha256
+                (base32
+                  "0as3bl5casgblqw365vw3ib39hhjxxaawq37n9hyr8a77hwax21j"))))
+          (build-system elm-package-build-system)
+          (synopsis
+            "Format localized date/time")
+          (description
+            "Format localized date/time")
+          (home-page #f)
           (license license:bsd-3))))
   (package
     (name "puzzledb-elm")
@@ -456,7 +474,8 @@
         ("elm-pointer-events" ,elm-pointer-events)
         ("elm-html-parser" ,elm-html-parser)
         ("elm-color" ,elm-color)
-        ("elm-browser" ,elm-browser)))
+        ("elm-browser" ,elm-browser)
+        ("elm-datetime" ,elm-datetime)))
     (arguments `(#:elm-modules ((("Pzvs.elm") . "pzvs.js")
                                 (("Puzzle.elm") . "puzzle.js")
                                 (("Blogs.elm") . "blogs.js")
