@@ -48,6 +48,9 @@
            (copy-recursively
             (string-append source "/templates")
             (string-append out "/templates"))
+           (copy-recursively
+            (string-append source "/img")
+            (string-append out "/img"))
            (install-file
             (string-append source "/pzprnode")
             bin)
@@ -61,6 +64,7 @@
                                   ,(string-append rsvg "/bin")))
              `("NODE_PATH" ":" prefix (,(string-append pzprjs "/js")))
              `("TEMPLATE_DIR" ":" = (,(string-append out "/templates")))
+             `("IMG_DIR" ":" = (,(string-append out "/img")))
              `("PZPR_DIR" ":" = (,pzprjs))))
          #t)))
     (home-page #f)
