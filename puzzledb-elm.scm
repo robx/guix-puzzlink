@@ -432,14 +432,14 @@
       (elm-datetime
         (package
           (name "elm-datetime")
-          (version "1.0.8")
+          (version "1.0.0")
           (source
             (origin
               (method url-fetch)
               (uri (elm-package-uri "robx/elm-datetime" version))
               (sha256
                 (base32
-                  "0as3bl5casgblqw365vw3ib39hhjxxaawq37n9hyr8a77hwax21j"))))
+                  "0w8y4s07i15dnj5wc9jnplm0q6rqmgixfcfw7i35nip68wfxc9n7"))))
           (build-system elm-package-build-system)
           (synopsis
             "Format localized date/time")
