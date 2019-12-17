@@ -287,7 +287,7 @@
       (elm-sha256
         (package
           (name "elm-sha256")
-          (version "1.0.8")
+          (version "1.0.9")
           (source
             (origin
               (method url-fetch)
@@ -296,7 +296,7 @@
                      version))
               (sha256
                 (base32
-                  "0n13iw8hfz9fknfjjw5dd6p5xqb9rksjs3c59dnb0yaa7dag467f"))))
+                  "0my9qyspjqh7qr7xslq9l5wqnknb5qbpim03b9rz453mqdy39hgy"))))
           (build-system elm-package-build-system)
           (synopsis
             "SHA256 and SHA228 cryptographic hashes Elm.")
