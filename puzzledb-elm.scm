@@ -8,16 +8,21 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
+  #:use-module (gnu packages version-control)
   #:use-module (json))
 
 (define-public puzzledb-frontend
  (package
    (name "puzzledb-frontend")
    (version "current")
-   (source "/home/rob/puzzledb/frontend")
+   (source "/home/rob/puzzledb") ; would prefer puzzledb/frontend, but need .git currently
    (build-system trivial-build-system)
    (native-inputs
-    `(("puzzledb-elm" ,puzzledb-elm)))
+    `(("make" ,gnu-make)
+      ("git" ,git)
+      ("coreutils" ,coreutils-minimal)
+      ("sed" ,sed)
+      ("puzzledb-elm" ,puzzledb-elm)))
    (arguments
     `(#:modules ((guix build utils))
       #:builder
@@ -25,12 +30,19 @@
           (use-modules (guix build utils))
           (let* ((elm (assoc-ref %build-inputs "puzzledb-elm"))
                  (source (assoc-ref %build-inputs "source"))
+                 (make (assoc-ref %build-inputs "make"))
+                 (git (assoc-ref %build-inputs "git"))
+                 (sed (assoc-ref %build-inputs "sed"))
+                 (coreutils (assoc-ref %build-inputs "coreutils"))
+                 (build "./build")
                  (out (assoc-ref %outputs "out")))
+            (setenv "PATH" (string-append (getenv "PATH") ":" make "/bin" ":" git "/bin" ":" coreutils "/bin" ":" sed "/bin"))
             (copy-recursively elm out)
-            (for-each
-              (lambda (f) (copy-file (string-append source "/" f) (string-append out "/" f)))
-              '("style.css" "pzvs.html" "blogs.html" "puzzle.html" "gmpuzzles.html" "gmsketch.html"))
-            (symlink "pzvs.html" (string-append out "/index.html"))))))
+            (copy-recursively source build)
+            (with-directory-excursion (string-append build "/frontend")
+              (invoke "make" "build-static")
+              (invoke "make" "install-static"
+                      (string-append "DESTDIR=" out)))))))
    (description #f)
    (synopsis #f)
    (license #f)
