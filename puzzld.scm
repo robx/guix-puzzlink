@@ -15,7 +15,8 @@
     (source "/home/rob/puzzld")
     (build-system haskell-build-system)
     (inputs
-     `(("ghc-rio" ,ghc-rio)
+     `(("ghc-aeson" ,ghc-aeson)
+       ("ghc-rio" ,ghc-rio)
        ("ghc-wai" ,ghc-wai)
        ("ghc-wai-websockets" ,ghc-wai-websockets)
        ("ghc-warp" ,ghc-warp)
