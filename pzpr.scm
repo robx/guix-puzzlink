@@ -19,7 +19,7 @@
              (string-append (assoc-ref %build-inputs "source") "/dist")
              %output)
            #t)))
-    (home-page #f)
+    (home-page "fake home page to cause rebuild")
     (synopsis #f)
     (license #f)
     (description #f)))
