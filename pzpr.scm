@@ -7,7 +7,7 @@
 (define-public pzprjs
   (package
     (name "pzprjs")
-    (version "current")
+    (version "updated")
     (source "/home/rob/pzprjs")
     (build-system trivial-build-system)
     (arguments
