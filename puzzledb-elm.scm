@@ -493,6 +493,7 @@
                                 (("Blogs.elm") . "blogs.js")
                                 (("Gmpuzzles.elm") . "gmpuzzles.js")
                                 (("Gmsketch.elm") . "gmsketch.js")
+                                (("Index.elm") . "index.js")
                                 (("Reset.elm") . "reset.js")
                                 (("Stats.elm") . "stats.js"))))
     (synopsis #f)
